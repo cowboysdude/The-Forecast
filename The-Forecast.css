@@ -1,0 +1,57 @@
+ 
+figure {
+  float: left;
+  width: 9%;
+  text-align: center;
+  font-style: italic;
+  font-size: 12px;
+  text-indent: 0;
+  margin: 0.5em;
+  padding: 0.5em;
+  line-height: 95%;
+}
+figures {
+  float: left;
+  width: 7%; 
+  text-align: center;
+  font-size: 15px;
+  text-indent: 0;
+  margin: 0.5em;
+  padding: 0.5em;
+  line-height: 90%;
+}
+.box-background {
+	background-size: 100px 100px;
+	background-color: #95c5ed;
+	 opacity: 0.3;
+	 color: white;
+}
+ 
+.photo {
+	height: 40%;
+	width: 40%;
+}
+body {
+  margin: 0;
+} 
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 75%;
+  padding-left: 115px;
+  padding-top: 44px;  
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:600px) {
+  .column {
+    width: 100%;
+  }
+}
