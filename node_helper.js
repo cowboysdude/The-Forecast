@@ -72,7 +72,7 @@ module.exports = NodeHelper.create({
 				this.sendSocketNotification('FORECAST_RESULT', farray); 
 				this.forecast.timestamp = self.getDate();
                 this.forecast.data = forecasts;
-                this.fileWrite();
+                fs.writeFileSync('forecast_array.json', JSON.stringify(this.forecast));
         });
     },
 
