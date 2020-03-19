@@ -92,16 +92,15 @@ Module.register("The-Forecast", {
     start: function() {
         Log.info("Starting module: " + this.name); 
         this.today = ""; 
-		this.forecast=[];
-		this.getForecast()
-        this.scheduleUpdate(); 	
+		this.forecast=null;
+
     },
 
 
    getDom: function() {  
 		console.log(this.forecast); 
         var wrapper = document.createElement("div");       
-		 if(this.forecasts) 
+		 if(this.forecast) 
          {
 		var forecasts = this.forecast; 
         
@@ -122,9 +121,8 @@ Module.register("The-Forecast", {
         nextRow.setAttribute('style','float:left;'); 
 		
 	  
-		for (a = 0; a < forecasts.length; a++) { 
-		if (forecast[a].isDaytime == true) {
-                var forecast = forecast[a]; 
+		for (var forecast of forecasts) { 
+		      if (forecast.isDaytime == true) {
 		 
     			var timey = moment().format('ddd');
                 var now = moment(forecast.startTime).format('ddd');
@@ -133,12 +131,13 @@ Module.register("The-Forecast", {
                 var udate = moment(forecast.startTime).format('H');
                 var iconImg = "modules/The-Forecast/icons/" + this.config.imageArray[forecast.shortForecast] + ".gif' height=10% width=10%>";
                 var wimage = this.config.imageArray[forecast.shortForecast];
-			if (forecast.name !== "Today"){
+			    if (forecast.name !== "Today"){
                 nextRow.innerHTML += `<figure>
 									  <figcaption>${forecast.hilow.day} - ${DayDate}</figcaption>
 									  <img src='modules/The-Forecast/icons/${wimage}.gif' height='45' width='55'>
-									   <figcaption>${high}&#730/${low}&#730</figcaption>
+
 									</figure>`;
+                                //   <figcaption>${high}&#730/${low}&#730</figcaption>
 			} 	} 
 		 }
 		 
@@ -161,6 +160,7 @@ console.log(this.forecast);
     }, 
      
     getForecast: function() {
+        Log.log("requesting forecast");
         this.sendSocketNotification('GET_FORECAST');
     },
 	
@@ -173,6 +173,12 @@ console.log(this.forecast);
         this.updateDom(this.config.initialLoadDelay);
 	 	 
     },
+    notificationReceived: function(notification,payload,source){
+        if (notification == "DOM_OBJECTS_CREATED"){
+            this.getForecast()
+            this.scheduleUpdate();  
+        }
+    }
    
 	 
     
