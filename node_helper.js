@@ -29,7 +29,7 @@ module.exports = NodeHelper.create({
         }
     }, 
 
-getForecast: function(url) {
+	getForecast: function(url) {
 		var self = this;
 		var forecasts;
 		request({
@@ -69,7 +69,7 @@ getForecast: function(url) {
 				
 	}
 	       //  console.log(farray);  
-				this.sendSocketNotification('FORECAST_RESULT', forecasts); 
+				this.sendSocketNotification('FORECAST_RESULT', farray); 
 				this.forecast.timestamp = self.getDate();
                 this.forecast.data = forecasts;
                 this.fileWrite();
