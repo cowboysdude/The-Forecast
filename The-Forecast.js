@@ -100,14 +100,16 @@ Module.register("The-Forecast", {
 
    getDom: function() {  
 		console.log(this.forecast); 
-		  
+        var wrapper = document.createElement("div");       
+		 if(this.forecasts) 
+         {
 		var forecasts = this.forecast; 
         
         var d = new Date();
         var n = d.getHours();
         var ev1 = moment().format("HH");
 
-        var wrapper = document.createElement("div"); 
+
   
 		//var testy = moment(forecast[0].endTime).format('dddd');
  
@@ -141,7 +143,7 @@ Module.register("The-Forecast", {
 		 }
 		 
         wrapper.appendChild(nextRow); 
-	 
+	    }
         return wrapper;
 		  
     },
